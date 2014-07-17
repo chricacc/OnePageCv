@@ -2,70 +2,66 @@
 <html ng-app="onePageCv">
 	<head>
 		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-
+		<!-- JQuery STUFF HERE -->
 		<script type="text/javascript" src="resources/js/frameworks/jquery.js"></script>
+		
+		<!-- TWITTER BOOTSTRAP STUFF HERE -->
 		<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
-
 		<link rel="stylesheet" type="text/css" href="resources/css/bootstrap-theme.css" />
-
 		<script type="text/javascript" src="resources/js/frameworks/bootstrap.js"></script>
+		
+		<!-- ANGULAR JS STUFF HERE -->
 		<script type="text/javascript" src="resources/js/frameworks/angular.js"></script>
+		
+		<!-- PERSONNAL PACKAGES (Make sure they are loaded after their dependencies...) -->
 		<script type="text/javascript" src="resources/js/app.js"></script>
-		<title>Mon CV</title>
+		<title>My CV</title>
 	</head>
 	<body class="container" ng-controller="CvController as cv">
-		<!-- JQuery STUFF HERE -->
-		<!-- TWITTER BOOTSTRAP STUFF HERE -->
-		<!-- ANGULAR JS STUFF HERE -->
-		<!-- PERSONNAL PACKAGES (Make sure they are loaded after their dependencies...) -->
+		
 		<header>
 			<h1 class="text-center">Welcome to my CV</h1>
 		</header>
 		<div class="product row" ng-repeat="skill in cv.skills">
-			<h3>{{skill.name}}</h3>
-			<h4>- {{skill.level}}</h4>
+			<h3>{{skill.name}} <small>- {{skill.level}}</small></h3>
 			<section class="tab" ng-controller="SkillTabController as skillTab">
 				<ul class="nav nav-pills">
 					<li ng-class="{active: skillTab.isSet(1)}">
-						<a href="href" ng-click="skillTab.setTab(1)">Description</a>
+						<a href="" ng-click="skillTab.setTab(1)">Description</a>
 					</li>
 					<li ng-class="{active: skillTab.isSet(2)}" ng-show="skill.projects">
-						<a href="href" ng-click="skillTab.setTab(2)">Projects</a>
+						<a href="" ng-click="skillTab.setTab(2)">Projects</a>
 					</li>
 					<li ng-class="{active: skillTab.isSet(3)}">
-						<a href="href" ng-click="skillTab.setTab(3)">Endorsements</a>
+						<a href="" ng-click="skillTab.setTab(3)">Endorsements</a>
 					</li>
 				</ul>
 				<div ng-show="skillTab.isSet(1)">
-					Description
-
 					<blockquote>{{skill.description}}</blockquote>
 				</div>
 				<div ng-show="skill.projects && skillTab.isSet(2)">
-					Projects
-
 					<div ng-repeat="project in skill.projects">
-						<h4>{{project.name}}</h4>
-						<blockquote>{{project.description}}</blockquote>
+						<blockquote>
+						  <strong>{{project.name}}</strong>
+						  <p>{{project.description}}</p>
+						</blockquote>
 					</div>
 				</div>
 				<div ng-show="skillTab.isSet(3)">
-					Endorsements
-
 					<div ng-repeat="endorsement in skill.endorsements">
 						<blockquote>
-							{{endorsement.comment}}
+							<p>{{endorsement.comment}}</p>
 
-							<h4>{{endorsement.grade}}/10 - {{endorsement.author}}</h4>
+							<footer><cite>{{endorsement.grade}}/10 - {{endorsement.author}}</cite></footer>
 						</blockquote>
 					</div>
 					<!--  Review Form -->
 					<form name="reviewForm" ng-controller="EndorsementController as endorsementCtrl" ng-submit="endorsementCtrl.addEndorsement(skill)">
 						<!--  Live Preview -->
 						<blockquote>
-							{{endorsementCtrl.endorsement.comment}}
+							<p>{{endorsementCtrl.endorsement.comment}}</p>
 
-							<h4>{{endorsementCtrl.endorsement.grade}}/10 - {{endorsementCtrl.endorsement.author}}</h4>
+							<footer>{{endorsementCtrl.endorsement.grade}}/10 - <cite>{{endorsementCtrl.endorsement.author}}</cite></footer>
 						</blockquote>
 						<!--  Review Form -->
 						<h4>Submit an endorsement</h4>
