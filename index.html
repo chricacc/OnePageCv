@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="resources/js/frameworks/angular.js"></script>
 		
 		<!-- PERSONNAL PACKAGES (Make sure they are loaded after their dependencies...) -->
+		 <link rel="stylesheet" type="text/css" href="resources/css/formStates.css" />
 		<script type="text/javascript" src="resources/js/app.js"></script>
 		<title>My CV</title>
 	</head>
@@ -56,7 +57,7 @@
 						</blockquote>
 					</div>
 					<!--  Review Form -->
-					<form name="reviewForm" ng-controller="EndorsementController as endorsementCtrl" ng-submit="endorsementCtrl.addEndorsement(skill)">
+					<form name="reviewForm" ng-controller="EndorsementController as endorsementCtrl" ng-submit="reviewForm.$valid && endorsementCtrl.addEndorsement(skill)" novalidate>
 						<!--  Live Preview -->
 						<blockquote>
 							<p>{{endorsementCtrl.endorsement.comment}}</p>
@@ -66,7 +67,7 @@
 						<!--  Review Form -->
 						<h4>Submit an endorsement</h4>
 						<fieldset class="form-group">
-							<select class="form-control" ng-options="grade for grade in [10,9,8,7,6,5,4,3,2,1,0]" ng-model="endorsementCtrl.endorsement.grade" title="Grade">
+							<select class="form-control" ng-options="grade for grade in [10,9,8,7,6,5,4,3,2,1,0]" ng-model="endorsementCtrl.endorsement.grade" title="Grade" required>
 								<option value="">Give the guy a grade</option>
 							</select>
 						</fieldset>
@@ -74,7 +75,7 @@
 							<textarea class="form-control" placeholder="Write a short comment about the guy's skills..." ng-model="endorsementCtrl.endorsement.comment" title="Comment"></textarea>
 						</fieldset>
 						<fieldset class="form-group">
-							<input ng-model="endorsementCtrl.endorsement.author" type="email" class="form-control" placeholder="JohnDoe@example.org" title="Email" />
+							<input ng-model="endorsementCtrl.endorsement.author" type="email" class="form-control" placeholder="JohnDoe@example.org" title="Email" required/>
 
 						</fieldset>
 						<fieldset class="form-group">
